@@ -2,7 +2,7 @@
   "name": "d3-mitch-tree",
   "version": "0.0.0-development",
   "description": "D3 plugin to create interactive navigatable hierarchical tree diagrams.",
-  "main": "./lib/d3-mitch-tree.js",
+  "main": "./src/index.js",
   "scripts": {
     "build-dev": "npm-run-all \"build-sass\" \"build-webpack-dev\" \"build-docs\"",
     "build-prd": "npm-run-all \"build-sass\" \"build-webpack-prd\" \"build-docs\"",
