@@ -1029,12 +1029,12 @@ class BaseTree extends EventEmitter {
             // - Double Clicking (i.e. to zoom in)
             // - Dragging (i.e. panning or moving around)
             // - Wheel (i.e. zoom in/out)
-            .on("zoom", () => {
+            .on("zoom", (event) => {
                 // The "zoom" event populates d3.event with an object that has
                 // a "transform" property (an object with three properties
                 // of x, y, and k), where x and y is for translation purposes,
                 // and k is the scaling factor
-                var transform = d3.event.transform;
+                var transform = event.transform;
                 this.getPanningContainer().attr("transform", transform);
             });
         this.getSvg().call(this.getZoomListener());
@@ -1205,7 +1205,7 @@ class BaseTree extends EventEmitter {
      * @emits {nodeClick} Emit node click event.
      * @returns {boolean} True meaning it successfully focused/expanded/collapsed a node. False otherwise.
      */
-    _onNodeClick(nodeDataItem, index, arr) {
+    _onNodeClick(nodeObj, nodeDataItem, arr) {
         var eventType = null;
         if (this.getAllowFocus())
             eventType = 'focus';
@@ -1214,11 +1214,13 @@ class BaseTree extends EventEmitter {
         else
             eventType = 'expand';
         
+
+            // nodeDataItemIndex: index,
         var event = {
             type: eventType,
             continue: true,
             nodeDataItem: nodeDataItem,
-            nodeDataItemIndex: index,
+            nodeObj: nodeObj,
             nodeDataItems: arr,
             preventDefault: function() {
                 event.continue = false;
